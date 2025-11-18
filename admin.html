@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVB - Painel Admin</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="icon" type="image/x-icon" href="src/avb_logo-p.jpeg">
+    <style>
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--verde-principal);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--verde-principal);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--cinza-escuro);
+            font-size: 0.9rem;
+        }
+        
+        .users-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .user-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.2s;
+        }
+        
+        .user-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--cinza-medio);
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: bold;
+            color: var(--verde-escuro);
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            color: var(--cinza-escuro);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .user-meta {
+            font-size: 0.8rem;
+            color: var(--cinza-escuro);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-edit {
+            background: var(--verde-claro);
+            color: white;
+        }
+        
+        .btn-deactivate {
+            background: #ff4444;
+            color: white;
+        }
+        
+        .search-box {
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--cinza-medio);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--cinza-escuro);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <div class="company-logo">
+                    <img src="src/logo-avb-removebg-preview.png" alt="logo" class="img-logo">
+                    <i class="logo-avb" src="src/logo-avb-removebg-preview.png"></i>
+                    
+                </div>
+            </div>
+            <br><br><br>
+            <div class="user-info"> 
+                <a href="admin.html" class="icone-conta">
+                    <img src="src/user.png" alt="Perfil" class="icone-perfil">
+                </a>
+                <button onclick="window.location.href='dashboard.html'" class="logout-btn">Voltar</button>
+            </div>
+        </header>
+        
+        <main class="dashboard-content">
+            <!-- Estatísticas -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalUsers">0</span>
+                    <span class="stat-label">Total de Usuários</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="activeUsers">0</span>
+                    <span class="stat-label">Usuários Ativos</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="todayUsers">0</span>
+                    <span class="stat-label">Cadastros Hoje</span>
+                </div>
+            </div>
+            
+            <!-- Busca -->
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar usuários por nome ou email...">
+            </div>
+            
+            <!-- Lista de Usuários -->
+            <div class="dashboard-card">
+                <h3 class="card-header">👥 Todos os Usuários</h3>
+                <div id="usersList" class="users-grid">
+                    <div class="loading">Carregando usuários...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    
+    <script src="js/firebase-config.js"></script>
+    <script>
+        // Variáveis
+        let allUsers = [];
+
+        // Carregar dados dos usuários
+        async function loadUsers() {
+            try {
+                const usersSnapshot = await db.collection('usuarios').get();
+                allUsers = [];
+                
+                usersSnapshot.forEach(doc => {
+                    allUsers.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                displayUsers(allUsers);
+                updateStats(allUsers);
+                
+            } catch (error) {
+                console.error('Erro ao carregar usuários:', error);
+                document.getElementById('usersList').innerHTML = '<div class="loading">Erro ao carregar usuários.</div>';
+            }
+        }
+
+        // Atualizar estatísticas
+        function updateStats(users) {
+            const totalUsers = users.length;
+            const activeUsers = users.filter(user => user.ativo !== false).length;
+            const todayUsers = users.filter(user => {
+                const today = new Date();
+                const userDate = user.dataCriacao.toDate();
+                return userDate.toDateString() === today.toDateString();
+            }).length;
+            
+            document.getElementById('totalUsers').textContent = totalUsers;
+            document.getElementById('activeUsers').textContent = activeUsers;
+            document.getElementById('todayUsers').textContent = todayUsers;
+        }
+
+        // Exibir usuários
+        function displayUsers(users) {
+            const usersList = document.getElementById('usersList');
+            
+            if (users.length === 0) {
+                usersList.innerHTML = '<div class="loading">Nenhum usuário encontrado.</div>';
+                return;
+            }
+            
+            usersList.innerHTML = users.map(user => `
+                <div class="user-card">
+                    <img src="${user.fotoPerfil || 'src/logo-avb-removebg-preview.png'}" 
+                         alt="Avatar" class="user-avatar"
+                         onerror="this.src='https://via.placeholder.com/60x60/2E7D32/FFFFFF?text=AVB'">
+                    <div class="user-info">
+                        <div class="user-name">${user.nome || 'Sem nome'}</div>
+                        <div class="user-email">${user.email}</div>
+                        <div class="user-meta">
+                            Cadastrado em: ${user.dataCriacao?.toDate().toLocaleDateString('pt-BR') || 'N/A'} |
+                            Departamento: ${user.departamento || 'Não informado'} |
+                            Status: <span style="color: ${user.ativo !== false ? '#4CAF50' : '#f44336'}">${user.ativo !== false ? 'Ativo' : 'Inativo'}</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn-small btn-edit" onclick="editUser('${user.id}')">
+                            Editar
+                        </button>
+                        <button class="btn-small btn-deactivate" onclick="toggleUserStatus('${user.id}', ${user.ativo !== false})">
+                            ${user.ativo !== false ? 'Desativar' : 'Ativar'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Buscar usuários
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (searchTerm === '') {
+                displayUsers(allUsers);
+                return;
+            }
+            
+            const filteredUsers = allUsers.filter(user => 
+                (user.nome && user.nome.toLowerCase().includes(searchTerm)) ||
+                user.email.toLowerCase().includes(searchTerm) ||
+                (user.departamento && user.departamento.toLowerCase().includes(searchTerm))
+            );
+            
+            displayUsers(filteredUsers);
+        });
+
+        // Editar usuário
+        function editUser(userId) {
+            alert(`Editar usuário: ${userId}\n\nFuncionalidade em desenvolvimento...`);
+        }
+
+        // Alternar status do usuário
+        async function toggleUserStatus(userId, isCurrentlyActive) {
+            const newStatus = !isCurrentlyActive;
+            const confirmMessage = newStatus ? 
+                'Ativar este usuário?' : 
+                'Desativar este usuário?';
+            
+            if (confirm(confirmMessage)) {
+                try {
+                    await db.collection('usuarios').doc(userId).update({
+                        ativo: newStatus,
+                        dataAtualizacao: new Date()
+                    });
+                    
+                    // Recarregar a lista
+                    await loadUsers();
+                    
+                    alert(`Usuário ${newStatus ? 'ativado' : 'desativado'} com sucesso!`);
+                    
+                } catch (error) {
+                    console.error('Erro ao atualizar usuário:', error);
+                    alert('Erro ao atualizar usuário.');
+                }
+            }
+        }
+
+        // Verificar autenticação
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                document.getElementById('adminEmail').textContent = user.email;
+                loadUsers();
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Logout
+        document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+            if (confirm('Tem certeza que deseja sair?')) {
+                auth.signOut().then(() => {
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVB - Dashboard</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="icon" type="image/x-icon" href="src/avb_logo-p.jpeg">
+</head>
+<body>
+    <!-- Dashboard Principal -->
+    <div class="dashboard">
+       <!-- Cabeçalho do Dashboard -->
+        <header class="dashboard-header">
+            <div class="company-logo">
+                    <img src="src/logo-avb-removebg-preview.png" alt="AVB Logo" class="img-logo">
+                </div>
+            <div class="header-left">
+                <!-- Menu Hamburger para Mobile -->
+                <button class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <div class="user-info">
+                <button onclick="window.location.href='perfil.html'" class="bnt-novo">👤 Meu Perfil</button>
+                <a href="admin.html" class="icone-conta">
+                    <img src="src/user.png" alt="Perfil" class="icone-perfil">
+                </a>
+                <button id="logoutBtn" class="logout-btn">Sair</button>
+            </div>
+            
+        </header>
+
+        <!-- Menu Mobile (Overlay) -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu-content">
+                <div class="mobile-menu-header">
+                    <div class="mobile-logo">
+                        <img src="src/logo-avb-removebg-preview.png" alt="AVB Logo" class="img-logo">
+                        <span class="company-name">AVB Brasil</span>
+                    </div>
+                    <button class="close-mobile-menu" id="closeMobileMenu">&times;</button>
+                </div>
+                
+                <nav class="mobile-nav">
+                    <ul class="mobile-nav-links">
+                        <li><a href="#" class="mobile-nav-link active" data-section="inicio">🏠 Início</a></li>
+                        <li><a href="#" class="mobile-nav-link" data-section="relatorios">📊 Relatórios</a></li>
+                        <li><a href="#" class="mobile-nav-link" data-section="sustentabilidade">🌱 Sustentabilidade</a></li>
+                        <li><a href="#" class="mobile-nav-link" data-section="noticias">📰 Notícias</a></li>
+                        <li><a href="#" class="mobile-nav-link" data-section="contato">📞 Contato</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="mobile-user-actions">
+                    <button onclick="window.location.href='perfil.html'" class="mobile-action-btn">
+                        👤 Meu Perfil
+                    </button>
+                    <button onclick="window.location.href='admin.html'" class="mobile-action-btn">
+                        ⚙️ Painel Admin
+                    </button>
+                    <button id="mobileLogoutBtn" class="mobile-action-btn logout">
+                        🚪 Sair
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegação Desktop (mantida para telas maiores) -->
+        <nav class="dashboard-nav">
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-section="inicio">🏠 Início</a></li>
+                <li><a href="#" class="nav-link" data-section="relatorios">📊 Relatórios</a></li>
+                <li><a href="#" class="nav-link" data-section="sustentabilidade">🌱 Sustentabilidade</a></li>
+                <li><a href="#" class="nav-link" data-section="noticias">📰 Notícias</a></li>
+                <li><a href="#" class="nav-link" data-section="contato">📞 Contato</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Conteúdo Principal -->
+        <main class="dashboard-content">
+            <!-- Carousel Fullscreen -->
+            <section id="inicio-section" class="content-section active">
+                <div class="hero-carousel">
+                    <!-- Slider main container -->
+                    <div class="swiper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide slide-1">
+                                <div class="slide-content">
+                                    <h2 class="slide-title">Sustentabilidade que Gera Resultados</h2>
+                                    <p class="slide-description">Uma das 1000 maiores empresas do país, segundo o Ranking do Valor Econômico</p>
+                                    <button class="slide-btn">Saiba Mais</button>
+                                </div>
+                                <div class="slide-overlay"></div>
+                            </div>
+                            <div class="swiper-slide slide-2">
+                                <div class="slide-content">
+                                    <h2 class="slide-title">Inovação em Siderurgia</h2>
+                                    <p class="slide-description">Primeira usina siderúrgica carbono neutro do mundo</p>
+                                    <button class="slide-btn">Conhecer Projeto</button>
+                                </div>
+                                <div class="slide-overlay"></div>
+                            </div>
+                            <div class="swiper-slide slide-3">
+                                <div class="slide-content">
+                                    <h2 class="slide-title">Crescimento Contínuo</h2>
+                                    <p class="slide-description">AVB amplia vendas e lucra R$146 milhões</p>
+                                    <button class="slide-btn">Ver Resultados</button>
+                                </div>
+                                <div class="slide-overlay"></div>
+                            </div>
+                            <div class="swiper-slide slide-4">
+                                <div class="slide-content">
+                                    <h2 class="slide-title">Compromisso Ambiental</h2>
+                                    <p class="slide-description">Tecnologias verdes e produção sustentável</p>
+                                    <button class="slide-btn">Nossos Projetos</button>
+                                </div>
+                                <div class="slide-overlay"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="swiper-pagination"></div>
+                        
+                        <!-- Navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+
+                <!-- Conteúdo abaixo do carousel -->
+                <div class="content-below-carousel">
+                    <div class="welcome-section">
+                        <h2>Bem-vindo ao Sistema AVB</h2>
+                        <p>Você está conectado ao dashboard corporativo da AVB. Acesse todas as funcionalidades do sistema.</p>
+                    </div>
+                    
+                    <div class="cards-grid">
+                        <div class="dashboard-card">
+                            <h3 class="card-header">📈 Posts Recentes</h3>
+                            <ul class="posts-list">
+                                <li>AVB amplia vendas e lucra R$146 milhões</li>
+                                <li>SUSTENTABILIDADE QUE GERA RESULTADOS</li>
+                                <li>AVB apresenta diagnóstico recomendando boas práticas</li>
+                                <li>Relatório de Ações de Responsabilidade Social AVB</li>
+                                <li>Primeira usina siderúrgica carbono neutro do mundo</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3 class="card-header">📊 Estatísticas</h3>
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <span class="stat-value">1.247</span>
+                                    <span class="stat-label">Visitas Hoje</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">89%</span>
+                                    <span class="stat-label">Satisfação</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">R$ 146M</span>
+                                    <span class="stat-label">Lucro</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3 class="card-header">⚡ Ações Rápidas</h3>
+                            <div class="quick-actions">
+                                <button class="action-btn">📋 Novo Relatório</button>
+                                <button class="action-btn">📰 Ver Notícias</button>
+                                <button class="action-btn">💬 Contatar Suporte</button>
+                                <button onclick="window.location.href='admin.html'" class="action-btn">👨‍💼 Painel Admin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Outras seções -->
+            <section id="relatorios-section" class="content-section">
+                <div class="dashboard-card">
+                    <h3 class="card-header">📊 Relatórios</h3>
+                    <p>Conteúdo dos relatórios será exibido aqui.</p>
+                </div>
+            </section>
+
+            <section id="sustentabilidade-section" class="content-section">
+                <div class="dashboard-card">
+                    <h3 class="card-header">🌱 Sustentabilidade</h3>
+                    <p>Informações sobre sustentabilidade e projetos ambientais.</p>
+                </div>
+            </section>
+
+            <section id="noticias-section" class="content-section">
+                <div class="dashboard-card">
+                    <h3 class="card-header">📰 Notícias</h3>
+                    <p>Últimas notícias da AVB.</p>
+                </div>
+            </section>
+
+            <section id="contato-section" class="content-section">
+                <div class="dashboard-card">
+                    <h3 class="card-header">📞 Contato</h3>
+                    <p>Informações de contato e suporte.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+ <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    
+    <!-- Nossos scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/dashboard.js"></script>
+    
+    <style>
+        /* Estilos do Carousel com Swiper */
+.hero-carousel {
+    position: relative;
+    height: 70vh;
+    margin-bottom: 30px;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slides com cores diferentes */
+.slide-1 {
+    background-image: 
+        url("src/avb-img.jpg"),
+        linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+    background-size: cover;
+    background-position: center;
+}
+
+.slide-2 {
+   background-image: 
+        url("src/avb-img2.jpg"),
+        linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+
+    background-size: cover;
+    background-position: center;
+}
+
+.slide-3 {
+    background-image: 
+        url("src/avb-img3.jpg"),
+        linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+    background-size: cover;
+    background-position: center;
+}
+
+.slide-4 {
+    background-image: 
+        url("src/avb-img4.jpg"),
+        linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+    background-size: cover;
+    background-position: center;
+
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.slide-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.slide-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    line-height: 1.2;
+}
+
+.slide-description {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1.4;
+}
+
+.slide-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.slide-btn:hover {
+    background: white;
+    color: var(--verde-principal);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Estilos da paginação do Swiper */
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* Estilos dos botões de navegação do Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Conteúdo abaixo do carousel */
+.content-below-carousel {
+    padding: 0 30px 30px;
+}
+
+        /* Responsividade do carousel */
+        @media (max-width: 768px) {
+            .hero-carousel {
+                height: 60vh;
+                margin: -20px -20px 20px -20px;
+            }
+
+            .slide-title {
+                font-size: 2.5rem;
+            }
+
+            .slide-description {
+                font-size: 1.2rem;
+            }
+
+            .carousel-control {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-carousel {
+                height: 50vh;
+            }
+
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .slide-description {
+                font-size: 1rem;
+            }
+
+            .slide-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>

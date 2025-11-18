@@ -1,0 +1,646 @@
+/* : Estilos da página de login/cadastro - Design Moderno */
+:root {
+    --verde-principal: #2E7D32;
+    --verde-claro: #4CAF50;
+    --verde-escuro: #1B5E20;
+    --verde-gradiente: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+    --branco: #FFFFFF;
+    --branco-transparente: rgba(255, 255, 255, 0.95);
+    --cinza-claro: #F8F9FA;
+    --cinza-medio: #E9ECEF;
+    --cinza-escuro: #6C757D;
+    --sombra-suave: 0 8px 32px rgba(46, 125, 50, 0.1);
+    --sombra-card: 0 20px 40px rgba(0, 0, 0, 0.1);
+    --borda-radius: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #85BC9B 0%, #04591e 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* : Background animado */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(46, 125, 50, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(33, 150, 243, 0.1) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+.container {
+    width: 100%;
+    max-width: 440px;
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* : Estilos do cabeçalho e logo */
+.logo-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-placeholder {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.logo-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--verde-gradiente);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sombra-suave);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.logo-avb {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--branco);
+    font-style: normal;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--branco);
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.subtitle {
+    color: var(--branco);
+    font-size: 16px;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+/* : Estilos do card principal */
+.card {
+    background: var(--branco-transparente);
+    backdrop-filter: blur(20px);
+    border-radius: var(--borda-radius);
+    box-shadow: var(--sombra-card);
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--verde-gradiente);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.card-title {
+    color: var(--verde-escuro);
+    margin-bottom: 8px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.card-subtitle {
+    color: var(--cinza-escuro);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* : Estilos do formulário */
+.auth-form {
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: var(--verde-escuro);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.icon {
+    font-size: 16px;
+}
+
+input {
+    width: 100%;
+    padding: 16px 48px 16px 16px;
+    border: 2px solid var(--cinza-medio);
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: var(--branco);
+    color: var(--verde-escuro);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--verde-principal);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    transform: translateY(-2px);
+}
+
+input::placeholder {
+    color: var(--cinza-escuro);
+    opacity: 0.7;
+}
+
+/* : Estilos do toggle de senha */
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.password-toggle:hover {
+    background-color: var(--cinza-medio);
+}
+
+.toggle-icon {
+    font-size: 18px;
+    user-select: none;
+}
+
+/* : Estilos dos botões */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: var(--verde-gradiente);
+    color: var(--branco);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--verde-principal);
+    border: 2px solid var(--verde-principal);
+}
+
+.btn-secondary:hover {
+    background: var(--verde-principal);
+    color: var(--branco);
+    transform: translateY(-2px);
+}
+
+.btn-text {
+    flex: 1;
+    text-align: center;
+}
+
+.btn-icon {
+    font-size: 18px;
+}
+
+/* : Estilos dos links */
+.auth-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--verde-principal);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.link:hover {
+    background: rgba(76, 175, 80, 0.1);
+    transform: translateX(5px);
+}
+
+.register-link {
+    background: rgba(76, 175, 80, 0.1);
+    font-weight: 600;
+}
+
+.register-link:hover {
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.link-icon {
+    font-size: 16px;
+}
+
+/* : Rodapé do card */
+.card-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--cinza-medio);
+}
+
+.card-footer p {
+    color: var(--cinza-escuro);
+    font-size: 12px;
+    margin: 0;
+}
+
+/* : Estilos das mensagens */
+.message {
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.error {
+    background: #FFEBEE;
+    color: #C62828;
+    border: 1px solid #FFCDD2;
+}
+
+.success {
+    background: #E8F5E9;
+    color: var(--verde-principal);
+    border: 1px solid #C8E6C9;
+}
+
+/* : Estilos do modal de cadastro */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: var(--branco);
+    border-radius: var(--borda-radius);
+    width: 90%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--sombra-card);
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.register-modal {
+    padding: 0;
+}
+
+.modal-header {
+    background: var(--verde-gradiente);
+    color: var(--branco);
+    padding: 32px;
+    text-align: center;
+    position: relative;
+    border-radius: var(--borda-radius) var(--borda-radius) 0 0;
+}
+
+.modal-logo {
+    margin-bottom: 16px;
+}
+
+.modal-logo .logo-avb {
+    font-size: 32px;
+}
+
+.modal-header .card-title {
+    color: var(--branco);
+    margin-bottom: 8px;
+}
+
+.modal-header .card-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--branco);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.register-modal .auth-form {
+    padding: 32px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* : Responsividade */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+    
+    .card {
+        padding: 30px 24px;
+        margin: 0 10px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .register-modal .auth-form {
+        padding: 24px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .logo-text {
+        font-size: 24px;
+    }
+    
+    .card-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .card {
+        padding: 24px 20px;
+    }
+    
+    .modal-header {
+        padding: 24px;
+    }
+    
+    .logo-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .logo-avb {
+        font-size: 20px;
+    }
+    
+    input {
+        padding: 14px 44px 14px 14px;
+    }
+}
+
+/* Animações de loading */
+.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* Estilos específicos para recuperação de senha */
+
+.recovery-modal .auth-form {
+    padding: 32px;
+}
+
+.recovery-info {
+    background: rgba(76, 175, 80, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 4px solid var(--verde-principal);
+}
+
+.recovery-info h4 {
+    color: var(--verde-principal);
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.recovery-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recovery-info li {
+    padding: 6px 0;
+    color: var(--cinza-escuro);
+    font-size: 14px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.recovery-info li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--verde-principal);
+    font-weight: bold;
+}
+
+/*  Estilos para loading nos botões */
+.loading-btn {
+    display: inline-block;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/*  Estilos para mensagens com HTML */
+.message {
+    line-height: 1.5;
+}
+
+.message.success {
+    text-align: left;
+}
+
+/*  Responsividade para o modal de recuperação */
+@media (max-width: 480px) {
+    .recovery-info {
+        padding: 15px;
+    }
+    
+    .recovery-info li {
+        font-size: 13px;
+    }
+}

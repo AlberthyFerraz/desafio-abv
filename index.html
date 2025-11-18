@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVB - Sistema de Login</title>
+    <link rel="stylesheet" href="styles/auth.css">
+    <link rel="icon" type="image/x-icon" href="src/avb_logo-p.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <!-- Background com efeito -->
+    <div class="background-animation"></div>
+    
+    <!-- Tela de Login -->
+    <div id="loginContainer" class="container">
+        <div class="logo-section">
+            <div >
+                <img src="src/logo-avb-removebg-preview.png">
+            </div>
+            <!-- Espaço para logo - -->
+            <div class="logo-placeholder">
+            </div>
+            <div class="subtitle">Sistema de Acesso Corporativo</div>
+        </div>
+        
+        <div class="card login-card">
+            <div class="card-header">
+                <h2 class="card-title">Bem-vindo de volta</h2>
+                <p class="card-subtitle">Faça login em sua conta</p>
+            </div>
+            
+            <!-- Mensagem de status -->
+            <div id="message" class="message"></div>
+            
+            <!-- Formulário de login -->
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="icon">📧</i>
+                        E-mail
+                    </label>
+                    <input type="email" id="email" placeholder="email@gmail.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">
+                        <i class="icon">🔒</i>
+                        Senha
+                    </label>
+                    <input type="password" id="password" placeholder="Sua senha " required>
+                    <div class="password-toggle" onclick="togglePassword('password')">
+                        <i class="toggle-icon">[👁️]</i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <span class="btn-text">Entrar no Sistema</span>
+                    <i class="btn-icon">→</i>
+                </button>
+            </form>
+            
+            <div class="auth-links">
+                <a id="forgotPassword" class="link">
+                    <i class="link-icon">🔑</i>
+                    Esqueci minha senha
+                </a>
+                <a id="showRegister" class="link register-link">
+                    <i class="link-icon">👤</i>
+                    Criar nova conta
+                </a>
+            </div>
+            
+            <div class="card-footer">
+                <p>© 2025 AVB Brasil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content register-modal">
+            
+            <div class="modal-header">
+                <div class="modal-logo">
+                    <div >
+                        <img src="src/logo-avb-removebg-preview.png">
+                    </div>
+
+                </div>
+                <h2 class="card-title">Junte-se à AVB</h2>
+                <p class="card-subtitle">Crie sua conta corporativa</p>
+                <button id="closeModal" class="close-btn">&times;</button>
+            </div>
+            
+            <!-- Mensagem de status do cadastro -->
+            <div id="registerMessage" class="message"></div>
+            
+            <!-- Formulário de cadastro -->
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="registerName">
+                        <i class="icon">👤</i>
+                        Nome Completo
+                    </label>
+                    <input type="text" id="registerName" placeholder="Seu nome completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">
+                        <i class="icon">📧</i>
+                        E-mail Corporativo
+                    </label>
+                    <input type="email" id="registerEmail" placeholder="email@avb.com.br" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">
+                        <i class="icon">🔒</i>
+                        Senha
+                    </label>
+                    <input type="password" id="registerPassword" placeholder="Mínimo 6 caracteres" required minlength="6">
+                    <div class="password-toggle" onclick="togglePassword('registerPassword')">
+                        <i class="toggle-icon">👁️</i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirmPassword">
+                        <i class="icon">✅</i>
+                        Confirmar Senha
+                    </label>
+                    <input type="password" id="registerConfirmPassword" placeholder="Digite a senha novamente" required>
+                    <div class="password-toggle" onclick="togglePassword('registerConfirmPassword')">
+                        <i class="toggle-icon">👁️</i>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" id="cancelRegister" class="btn btn-secondary">
+                        <i class="btn-icon">←</i>
+                        Voltar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Criar Conta</span>
+                        <i class="btn-icon">🚀</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+
+    <!-- Nossos scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script>
+        //  Função para alternar visibilidade da senha
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const toggleIcon = input.parentNode.querySelector('.toggle-icon');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                toggleIcon.textContent = ' Esconder senha';
+            } else {
+                input.type = 'password';
+                toggleIcon.textContent = 'Ver senha';
+            }
+        }
+    </script>
+</body>
+</html>

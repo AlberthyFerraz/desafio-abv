@@ -74,3 +74,59 @@ const firebaseConfig = {
     messagingSenderId: "seu-sender-id",
     appId: "seu-app-id"
 };
+```
+## 🎨 Características
+Design: Paleta corporativa verde da AVB
+
+Responsivo: Mobile-first approach
+
+Performance: Otimizado para carregamento rápido
+
+Segurança: Autenticação Firebase
+
+Usabilidade: Interface intuitiva e acessível
+
+## 🔒 Segurança
+Autenticação com Firebase Auth
+
+Validação de senhas fortes
+
+Proteção de rotas
+
+Logout automático
+
+Dados criptografados
+
+## 📱 Responsividade
+- Desktop: 1200px+
+
+- Tablet: 768px - 1199px
+
+- Mobile: 320px - 767px
+
+## 🐛 Solução de Problemas
+-- Problemas Comuns
+- CSS não carrega: Use servidor local
+
+- Erro de autenticação: Verifique credenciais do Firebase
+
+- Carousel não funciona: Verifique console do navegador
+
+## Debug
+- Abra console (F12) para ver logs
+
+- Verifique erros no Firebase Console
+
+- Confirme se Authentication está ativo
+
+## 🤝 Contribuição
+Fork o projeto
+
+- Crie uma branch: git checkout -b feature/nova-feature
+
+- Commit: git commit -m 'Adiciona nova feature'
+
+- Push: git push origin feature/nova-feature
+
+- Abra Pull Request
+

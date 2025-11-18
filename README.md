@@ -37,18 +37,18 @@ Sistema completo de autenticação e dashboard corporativo com interface moderna
 - **Ícones**: Emojis nativos
 
 ## 📁 Estrutura
-avb-sistema/
-├── index.html
-├── dashboard.html
-├── admin.html
-├── styles/
-│ ├── auth.css
-│ └── dashboard.css
-└── js/
-├── firebase-config.js
-├── auth.js
-├── dashboard.js
-└── firestore.js
+- avb-sistema/
+- ├── index.html
+- ├── dashboard.html
+- ├── admin.html
+- ├── styles/
+- │ ├── auth.css
+- │ └── dashboard.css
+- └── js/
+- ├── firebase-config.js
+- ├── auth.js
+- ├── dashboard.js
+- └── firestore.js
 ## ⚡ Como Usar
 
 1. Abra `index.html` no navegador

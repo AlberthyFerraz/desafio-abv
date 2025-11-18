@@ -1,4 +1,5 @@
 #📋 AVB Brasil - Sistema de Autenticação e Dashboard
+
 Sistema web corporativo moderno desenvolvido para a AVB Brasil, com autenticação segura via Firebase e dashboard interativo. Interface elegante com paleta de cores verde e branco, totalmente responsiva e com carousel automático.
 
 🚀 Funcionalidades Principais

@@ -18,7 +18,7 @@
 }
 
 body {
-    padding-top: 110px;
+    padding-top: 120px;
     background-color: var(--cinza-claro);
 }
 
@@ -31,7 +31,7 @@ body {
 .dashboard-header {
     background-color: var(--verde-claro);
     color: var(--branco);
-    padding: 1px 20px;   /* 🔥 menor */
+    padding: 5px 30px;   /* 🔥 menor */
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -302,14 +302,23 @@ body {
     .nav-links {
         justify-content: center;
     }
+    .img-logo{
+        width: 70%;        /* ajuste aqui o tamanho desejado */
+        height: auto;      /* mantém proporção */
+        max-width: 300px;  /* tamanho máximo no mobile */
+        display: block;
+        margin: 0 auto;
+    }
 }
 .img-logo{
     background-color: var(--verde-claro);
     border-radius:2em;
     size: 4vh;
 }
-
-
+.img-logo-menor{
+    width: 9vh;
+    height: 9%;
+}
 /* Animações para mensagens */
 @keyframes slideIn {
     from {
@@ -488,7 +497,7 @@ body {
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
     background: var(--verde-gradiente);
-    color: var(--branco);
+    color:#C62828;
     border-left-color: var(--verde-principal);
     transform: translateX(5px);
 }
@@ -547,6 +556,7 @@ body {
     .header-left .company-name {
         display: none;
     }
+    
 }
 
 /* Ajustes para telas muito pequenas */
@@ -564,8 +574,11 @@ body {
     }
     
     .company-logo .img-logo {
-        width: 35px;
-        height: 35px;
+        width: 70%;        
+        height: auto;      
+        max-width: 300px; 
+        display: block;
+        margin: 0 auto;
     }
 }
 

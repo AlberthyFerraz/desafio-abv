@@ -61,6 +61,7 @@
             border-radius: 50%;
             object-fit: cover;
             background-color: var(--cinza-medio);
+            
         }
         
         .user-info {
@@ -124,6 +125,11 @@
             padding: 40px;
             color: var(--cinza-escuro);
         }
+        @media (max-width: 768px) {
+        .user-avatar {
+            width: 4vh;   /* tamanho menor e proporcional */
+            height: 4vh;
+        }}
     </style>
 </head>
 <body>
@@ -136,7 +142,7 @@
                     
                 </div>
             </div>
-            <br><br><br>
+           
             <div class="user-info"> 
                 <a href="admin.html" class="icone-conta">
                     <img src="src/user.png" alt="Perfil" class="icone-perfil">

@@ -18,6 +18,7 @@
 }
 
 body {
+    padding-top: 110px;
     background-color: var(--cinza-claro);
 }
 
@@ -30,12 +31,16 @@ body {
 .dashboard-header {
     background-color: var(--verde-claro);
     color: var(--branco);
-    padding: 20px 30px;
+    padding: 1px 20px;   /* 🔥 menor */
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-   
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
 }
 
 .dashboard-header h1 {
@@ -601,4 +606,17 @@ body {
 /* Prevenir scroll do body quando menu aberto */
 body.menu-open {
     overflow: hidden;
+}
+
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+    .dashboard-header {
+        position: static;   /* mobile = header normal */
+        padding: 12px 20px; 
+    }
+
+    body {
+        padding-top: 0;    
+    }
 }
